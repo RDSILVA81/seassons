@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import SeasonDisplay from "./SeasonDisplay";
+import Spinner from "./Spinner";
 
 class APP extends React.Component{
 
@@ -14,15 +15,23 @@ class APP extends React.Component{
     }
 
     render(){
-       if(this.state.errorMessage && !this.state.lat){
-            return <div>Error : {this.state.errorMessage}</div>
-       }
+       return (
+            <div className="border red">
+                {this.renderContent()}
+            </div>
+       );
+    }
 
-       if(!this.state.errorMessage && this.state.lat){
+    renderContent(){
+        if(this.state.errorMessage && !this.state.lat){
+            return <div>Error : {this.state.errorMessage}</div>
+        }
+
+        if(!this.state.errorMessage && this.state.lat){
             return <SeasonDisplay lat={this.state.lat}/>
-       }
+        }
        
-       return <div>Loading!</div>
+        return <Spinner message='Approve to share your location !!'/>
     }
 }
 
